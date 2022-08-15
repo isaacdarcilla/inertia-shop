@@ -15,13 +15,16 @@ class StoreController extends Controller
             'filter' => $filter,
             'products' => Product::orderByName()
                 ->filter(['name', 'description', 'price', 'slug'], $filter ?? '')
+                ->with('category')
                 ->paginate(10)
                 ->transform(function ($product) {
                     return [
+                        'id' => $product->id,
                         'name' => $product->name,
                         'description' => Str::limit($product->description, 100),
                         'slug' => $product->slug,
-                        'price' => $product->price
+                        'price' => $product->price,
+                        'category' => $product->category->name
                     ];
                 })
         ]);
