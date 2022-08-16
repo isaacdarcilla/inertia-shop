@@ -3,6 +3,7 @@
 namespace App\Http\Repositories\Cart;
 
 use App\Models\Cart;
+use App\Models\Product;
 
 class CartRepositories implements CartInterface
 {
@@ -24,5 +25,18 @@ class CartRepositories implements CartInterface
                     ];
                 })
         ];
+    }
+
+    public function createCart(Product $product)
+    {
+        return Cart::create([
+            'product_id' => $product->id,
+            'price' => $product->price,
+        ]);
+    }
+
+    public function pay(): int
+    {
+        return Cart::query()->update(['checkout_at' => now()]);
     }
 }

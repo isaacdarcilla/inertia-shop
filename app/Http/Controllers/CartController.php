@@ -27,37 +27,21 @@ class CartController extends Controller
 
     public function store(Product $product): RedirectResponse
     {
-        Cart::create([
-            'product_id' => $product->id,
-            'price' => $product->price,
-        ]);
+        $this->cart->createCart($product);
 
         return redirect()->back();
     }
 
     public function checkout()
     {
-        return inertia('Cart/Checkout', [
-            'filter' => $this->filter,
-            'total' => Cart::checkoutAt()->count(),
-            'total_price' => Cart::sum('price'),
-            'carts' => Cart::with('product')
-                ->checkoutAt()
-                ->get()
-                ->transform(function ($cart) {
-                    return [
-                        'id' => $cart->id,
-                        'product' => $cart->product->name,
-                        'price' => $cart->product->price,
-                        'category' => $cart->product->category->name
-                    ];
-                })
-        ]);
+        return inertia('Cart/Checkout',
+            $this->cart->all($this->filter)
+        );
     }
 
     public function pay(): RedirectResponse
     {
-        Cart::query()->update(['checkout_at' => now()]);
+        $this->cart->pay();
 
         return redirect()->route('store.index');
     }
