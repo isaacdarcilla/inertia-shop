@@ -1,6 +1,7 @@
 <template>
     <Nav :cart="total"/>
-    <div class="mt-24 mb-4 mx-auto max-w-lg">
+
+    <div v-if="carts.length > 0" class="mt-24 mb-4 mx-auto max-w-lg">
         <div
             class="flex max-w-full bg-white shadow-lg overflow-hidden">
             <div class="align-middle mx-auto">
@@ -46,20 +47,28 @@
             </div>
         </div>
     </div>
-    <div class="mx-auto max-w-lg mb-16">
-        <button
-            class="w-full h-8 px-6 text-indigo-100 transition-colors duration-150 bg-yellow-600 focus:shadow-outline hover:bg-indigo-800">
-            Proceed to Checkout
-        </button>
+    <div v-if="carts.length > 0" class="mx-auto max-w-lg mb-16">
+        <Link href="/cart/checkout">
+            <button
+                class="w-full h-8 px-6 text-indigo-100 transition-colors duration-150 bg-yellow-600 focus:shadow-outline hover:bg-indigo-800">
+                Proceed to Checkout
+            </button>
+        </Link>
+
+    </div>
+    <div v-if="carts.length <= 0" class="py-6 mt-24">
+        <p class="text-center">Cart is empty.</p>
     </div>
 </template>
 
 <script>
 import Nav from "../Layout/Nav";
+import {Link} from '@inertiajs/inertia-vue3';
 
 export default {
     components: {
         Nav,
+        Link,
     },
     props: {
         filter: Object,

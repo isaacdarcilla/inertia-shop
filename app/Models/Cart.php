@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static create(array $array)
  * @method static count()
  * @method static sum(string $string)
+ * @method static checkoutAt()
  */
 class Cart extends Model
 {
@@ -21,5 +22,10 @@ class Cart extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function scopeCheckoutAt($query)
+    {
+        $query->whereNull('checkout_at');
     }
 }

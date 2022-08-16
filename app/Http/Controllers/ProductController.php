@@ -6,7 +6,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Support\Str;
 
-class StoreController extends Controller
+class ProductController extends Controller
 {
     protected $filter;
 
@@ -17,7 +17,7 @@ class StoreController extends Controller
 
     public function index()
     {
-        return inertia('Store/Index', [
+        return inertia('Product/Index', [
             'filter' => $this->filter,
             'total' => Cart::checkoutAt()->count(),
             'products' => Product::orderByName()
