@@ -6,12 +6,20 @@
                  id="navbar-sticky">
                 <ul class="flex flex-col mx-auto p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
-                        <a href="#"
-                           class="block py-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Shop</a>
+                        <Link href="/"
+                              class="block py-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                            Shop
+                        </Link>
                     </li>
-                    <li>
-                        <a href="#"
-                           class="block py-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Cart</a>
+                    <li class="flex">
+                        <Link href="/cart"
+                              class="block py-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                            Cart
+                        </Link>
+                        <span
+                            class="mx-1 mt-[0.5px] inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-red-100 bg-green-600 rounded-full">{{
+                                cart
+                            }}</span>
                     </li>
                     <li>
                         <a href="#"
@@ -24,7 +32,12 @@
 </template>
 
 <script>
+import {Link} from '@inertiajs/inertia-vue3'
+
 export default {
+    components: {
+        Link,
+    },
     props: {
         cart: Number,
     },

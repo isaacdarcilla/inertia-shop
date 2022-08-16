@@ -8,22 +8,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @method static orderByName()
+ * @method static create(array $array)
  * @method static count()
+ * @method static sum(string $string)
  */
-class Product extends Model
+class Cart extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
-    public function category(): BelongsTo
+    public function product(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function scopeOrderByName($query)
-    {
-        $query->orderBy('name');
+        return $this->belongsTo(Product::class);
     }
 }

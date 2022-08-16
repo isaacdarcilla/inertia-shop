@@ -1,5 +1,5 @@
 <template>
-    <Nav cart="2"/>
+    <Nav :cart="total"/>
     <div class="mt-24 mx-auto max-w-lg">
         <input v-model="this.form.search" type="text" placeholder="Search..."
                class="p-2 mb-3 flex w-full max-w-full bg-white shadow-lg overflow-hidden">
@@ -15,7 +15,7 @@
                     <p class="mt-2 text-gray-600 text-xs">{{ product.description }}</p>
                     <div class="flex item-center justify-between mt-3">
                         <h1 class="text-gray-700 font-bold text-xl">₱ {{ product.price }}</h1>
-                        <button @click="addToCart(product)"
+                        <button :disabled="isLoading" @click="addToCart(product)"
                                 class="px-3 py-2 bg-orange-500 text-white text-xs font-bold rounded">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
@@ -50,6 +50,7 @@ export default {
     props: {
         filter: Object,
         products: Object,
+        total: Number,
     },
     data() {
         return {
@@ -72,7 +73,15 @@ export default {
             this.form = mapValues(this.form, () => null)
         },
         addToCart(product) {
-            this.$inertia.post(`/cart/post/${product.id}`,)
+            this.$inertia.post(`/cart/post/${product.id}`, {product}, {
+                onStart: () => (this.isLoading = true),
+                onFinish: () => {
+                    this.isLoading = false;
+                    this.$toast.success(`Added to cart.`, {
+                        position: "bottom",
+                    });
+                },
+            })
         },
     },
 }

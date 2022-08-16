@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Support\Str;
 
@@ -13,6 +14,7 @@ class StoreController extends Controller
 
         return inertia('Store/Index', [
             'filter' => $filter,
+            'total' => Cart::count(),
             'products' => Product::orderByName()
                 ->filter(['name', 'description', 'price', 'slug'], $filter ?? '')
                 ->with('category')

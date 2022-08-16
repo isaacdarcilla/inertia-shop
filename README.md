@@ -10,7 +10,7 @@ Installation
 * git clone https://github.com/isaacdarcilla/inertia-shop
 * composer install
 * yarn install
-* yarn run watch (dev)
+* yarn run watch
 * php artisan key:generate
 * php artisan migrate
 * php artisan serve
