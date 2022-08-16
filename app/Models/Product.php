@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @method static orderByName()
  * @method static count()
+ * @method static where(string $string, $slug)
  */
 class Product extends Model
 {

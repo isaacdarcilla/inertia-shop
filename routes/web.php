@@ -14,3 +14,5 @@ Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.ch
 Route::post('/cart/update', [CartController::class, 'pay'])->name('cart.pay');
 
 Route::get('/products', [ProductController::class, 'index'])->name('product.index');
+Route::get('/product/{slug}', [ProductController::class, 'edit'])->name('product.edit');
+Route::delete('/product/destroy/{product}', [ProductController::class, 'destroy'])->name('product.destroy');

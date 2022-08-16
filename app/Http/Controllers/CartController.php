@@ -2,38 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\Cart\CartInterface;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
     protected $filter;
+    protected $cart;
 
-    public function __construct()
+    public function __construct(CartInterface $cart)
     {
         $this->filter = request('search');
+        $this->cart = $cart;
     }
 
     public function index()
     {
-        return inertia('Cart/Index', [
-            'filter' => $this->filter,
-            'total' => Cart::checkoutAt()->count(),
-            'total_price' => Cart::checkoutAt()->sum('price'),
-            'carts' => Cart::with('product')
-                ->checkoutAt()
-                ->get()
-                ->transform(function ($cart) {
-                    return [
-                        'id' => $cart->id,
-                        'product' => $cart->product->name,
-                        'price' => $cart->product->price,
-                        'category' => $cart->product->category->name
-                    ];
-                })
-        ]);
+        return inertia('Cart/Index',
+            $this->cart->all($this->filter)
+        );
     }
 
     public function store(Product $product): RedirectResponse

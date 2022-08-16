@@ -1,31 +1,52 @@
 <template>
     <Nav :cart="total"/>
     <div class="mt-24 mx-auto max-w-lg">
-        <input v-model="this.form.search" type="text" placeholder="Search..."
-               class="p-2 mb-3 flex w-full max-w-full bg-white shadow-lg overflow-hidden">
-        <div v-for="product in products" :key="product.id" class="py-2">
-            <div
-                class="flex max-w-full bg-white shadow-lg overflow-hidden hover:bg-gray-200 duration-300">
-                <div class="w-3/3 p-4">
-                    <h1 class="text-gray-900 font-bold text-2xl">{{ product.name }}</h1>
-                    <span
-                        class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-indigo-100 bg-indigo-600 rounded-full">{{
-                            product.category
-                        }}</span>
-                    <p class="mt-2 text-gray-600 text-xs">{{ product.description }}</p>
-                    <div class="flex item-center justify-between mt-3">
-                        <h1 class="text-gray-700 font-bold text-xl">₱ {{ product.price }}</h1>
-                        <button :disabled="isLoading" @click="addToCart(product)"
-                                class="px-3 py-2 bg-orange-500 text-white text-xs font-bold rounded">
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                     stroke="currentColor" stroke-width="2">
-                                  <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-                                </svg>
-                            </span>
-                        </button>
-                    </div>
+        <div class="flex">
+            <input v-model="this.form.search" type="text" placeholder="Search..."
+                   class="p-2 w-9/12 mb-3 flex max-w-full bg-white shadow-lg overflow-hidden">
+            <button class="ml-2 w-3/12 p-2 mb-3 text-white text-center mx-auto hover:bg-indigo-400 bg-indigo-500 shadow-lg overflow-hidden">Add
+                Product
+            </button>
+        </div>
+        <div
+            class="flex max-w-full bg-white shadow-lg overflow-hidden">
+            <div class="align-middle mx-auto">
+                <div class="overflow-x-auto relative text-center">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <tbody>
+                        <tr v-for="product in products" :key="product.id"
+                            class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                            <th scope="row"
+                                class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ product.name }}
+                            </th>
+                            <td class="py-4 px-6">
+                                {{ product.category }}
+                            </td>
+                            <td class="py-4 px-6">
+                                PHP {{ product.price }}
+                            </td>
+                            <td class="py-4 px-6 flex">
+                                <Link :href="product.url">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mt-1" fill="none"
+                                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </Link>
+                                <button @click="deleteProduct(product)"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mt-1" fill="none"
+                                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -40,12 +61,14 @@ import {Head} from '@inertiajs/inertia-vue3'
 import Nav from "../Layout/Nav";
 import Loading from "../Layout/Loading";
 import {mapValues, pickBy, throttle} from "lodash";
+import {Link} from '@inertiajs/inertia-vue3'
 
 export default {
     components: {
         Loading,
         Nav,
         Head,
+        Link,
     },
     props: {
         filter: Object,
@@ -64,7 +87,7 @@ export default {
         form: {
             deep: true,
             handler: throttle(function () {
-                this.$inertia.get('/', pickBy(this.form), {preserveState: true})
+                this.$inertia.get('/products', pickBy(this.form), {preserveState: true})
             }, 150),
         },
     },
@@ -72,12 +95,12 @@ export default {
         reset() {
             this.form = mapValues(this.form, () => null)
         },
-        addToCart(product) {
-            this.$inertia.post(`/cart/post/${product.id}`, {product}, {
+        deleteProduct(product) {
+            this.$inertia.delete(`/product/destroy/${product.id}`, {
                 onStart: () => (this.isLoading = true),
                 onFinish: () => {
                     this.isLoading = false;
-                    this.$toast.success(`Added to cart.`, {
+                    this.$toast.success(`Product removed.`, {
                         position: "bottom",
                     });
                 },

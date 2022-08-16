@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Repositories\Cart\CartInterface;
+use App\Http\Repositories\Cart\CartRepositories;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(CartInterface::class, CartRepositories::class);
     }
 
     /**
