@@ -7,6 +7,8 @@ Requirements
 
 ## Installation
 
+> Please setup .env also
+
 * git clone https://github.com/isaacdarcilla/inertia-shop
 * composer install
 * yarn install
