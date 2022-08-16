@@ -1,11 +1,11 @@
-Prosperna Test
+## Prosperna Test
 
 Requirements
 * Laravel 8.75
 * PHP 7.4
 * Xampp or Laragon
 
-Installation
+## Installation
 
 * git clone https://github.com/isaacdarcilla/inertia-shop
 * composer install
@@ -15,7 +15,7 @@ Installation
 * php artisan migrate --seed
 * php artisan serve
 
-Screenshots
+## Screenshots
 
 ![image](https://user-images.githubusercontent.com/22732118/184830656-55b507c6-5554-42b6-9b98-132d597c145e.png)
 ![image](https://user-images.githubusercontent.com/22732118/184830727-444c9562-4ffa-4383-a4fa-689ad5f1e919.png)
