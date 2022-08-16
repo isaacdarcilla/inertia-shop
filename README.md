@@ -1,4 +1,4 @@
-## Prosperna Test
+## Test
 
 Requirements
 * Laravel 8.75
