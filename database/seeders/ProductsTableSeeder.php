@@ -22,11 +22,13 @@ class ProductsTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
+                'user_id' => 1,
                 'category_id' => 1,
                 'name' => 'Milktea',
                 'description' => 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum',
                 'slug' => 'milktea-3252',
                 'price' => '50',
+                'image' => NULL,
                 'created_at' => '2022-08-13 13:20:04',
                 'updated_at' => '2022-08-13 13:20:04',
                 'deleted_at' => NULL,
@@ -34,11 +36,13 @@ class ProductsTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
+                'user_id' => 1,
                 'category_id' => 1,
                 'name' => 'Iced Tea',
                 'description' => 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document.',
                 'slug' => 'iced-tea-3252',
                 'price' => '49',
+                'image' => NULL,
                 'created_at' => '2022-08-13 13:20:04',
                 'updated_at' => '2022-08-13 13:20:04',
                 'deleted_at' => NULL,

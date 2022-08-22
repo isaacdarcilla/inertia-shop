@@ -8,8 +8,8 @@ Requirements
 ## TODO
 
 * Unit test
-* Product crud - add images
-* User relations - uses hasMany products
+* Product crud
+* <s>User relations - user hasMany products & carts</s>
 
 ## Installation
 
@@ -20,6 +20,7 @@ Requirements
 * yarn install
 * yarn run watch
 * php artisan key:generate
+* php artisan storage:link
 * php artisan migrate --seed
 * php artisan serve
 
