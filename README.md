@@ -5,6 +5,12 @@ Requirements
 * PHP 7.4
 * Xampp or Laragon
 
+## TODO
+
+* Unit test
+* Product crud - add images
+* User relations - uses hasMany products
+
 ## Installation
 
 > Please setup .env also
