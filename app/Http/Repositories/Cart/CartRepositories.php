@@ -7,6 +7,12 @@ use App\Models\Product;
 
 class CartRepositories implements CartInterface
 {
+    /**
+     * Return all in carts
+     *
+     * @param $filter
+     * @return array
+     */
     public function all($filter): array
     {
         return [
@@ -27,6 +33,12 @@ class CartRepositories implements CartInterface
         ];
     }
 
+    /**
+     * Create a cart
+     *
+     * @param Product $product
+     * @return mixed
+     */
     public function createCart(Product $product)
     {
         return Cart::create([
@@ -35,7 +47,12 @@ class CartRepositories implements CartInterface
         ]);
     }
 
-    public function pay(): int
+    /**
+     * Process payment and remove all in carts
+     *
+     * @return float
+     */
+    public function pay(): float
     {
         return Cart::query()->update(['checkout_at' => now()]);
     }

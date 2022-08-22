@@ -23,6 +23,12 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    /**
+     * Order scoping
+     *
+     * @param $query
+     * @return void
+     */
     public function scopeOrderByName($query)
     {
         $query->orderBy('name');

@@ -24,6 +24,12 @@ class Cart extends Model
         return $this->belongsTo(Product::class);
     }
 
+    /**
+     * Checkout scoping
+     *
+     * @param $query
+     * @return void
+     */
     public function scopeCheckoutAt($query)
     {
         $query->whereNull('checkout_at');

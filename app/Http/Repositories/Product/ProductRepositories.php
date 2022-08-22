@@ -8,13 +8,19 @@ use Illuminate\Support\Str;
 
 class ProductRepositories implements ProductInterface
 {
+    /**
+     * Return all products
+     *
+     * @param $filter
+     * @return array
+     */
     public function all($filter): array
     {
         return [
             'filter' => $filter,
             'total' => Cart::checkoutAt()->count(),
             'products' => Product::orderByName()
-                ->filter(['name', 'description', 'price', 'slug'], $filter ?? '')
+                ->filter(['name', 'description', 'price', 'slug'], $filter ?? '') // Macro in AppServiceProvider
                 ->with('category')
                 ->paginate(10)
                 ->transform(function ($product) {
