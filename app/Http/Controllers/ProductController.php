@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Repositories\Product\ProductInterface;
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
@@ -48,6 +49,7 @@ class ProductController extends Controller
         return inertia('Product/Edit', [
             'total' => Cart::checkoutAt()->count(),
             'product' => $this->product->item($slug),
+            'categories' => Category::all(),
         ]);
     }
 

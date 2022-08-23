@@ -13,34 +13,47 @@
                         <div class="">
                             <div class="space-x-0 lg:flex lg:space-x-4">
                                 <div class="w-full lg:w-1/2">
-                                    <label for="firstName" class="block mb-3 text-sm font-semibold text-gray-500">First
+                                    <label for="item_name" class="block mb-3 text-sm font-semibold text-gray-500">Item
                                         Name</label>
-                                    <input name="firstName" value="Isaac" type="text" placeholder="First Name"
+                                    <input name="item_name" v-model="form.item_name" type="text" placeholder="Item name"
                                            class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
                                 </div>
                                 <div class="w-full lg:w-1/2 ">
-                                    <label for="firstName" class="block mb-3 text-sm font-semibold text-gray-500">Last
-                                        Name</label>
-                                    <input value="Arcilla" name="Last Name" type="text" placeholder="Last Name"
-                                           class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    <label for="category" class="block mb-3 text-sm font-semibold text-gray-500">Category</label>
+                                    <select name="category" v-model="form.item_category"
+                                            class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                        <option selected disabled value="null">Select category</option>
+                                        <option v-for="category in categories" value="{{ category.id }}">
+                                            {{ category.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <div class="space-x-0 lg:flex lg:space-x-4">
+                                    <div class="w-full lg:w-1/2">
+                                        <label for="price" class="block mb-3 text-sm font-semibold text-gray-500">Item
+                                            Price</label>
+                                        <input name="price" v-model="form.item_price" type="text"
+                                               placeholder="Item price"
+                                               class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+                                    <div class="w-full lg:w-1/2 ">
+                                        <label for="image" class="block mb-3 text-sm font-semibold text-gray-500">Item
+                                            Image</label>
+                                        <input name="image" v-model="form.item_image" type="file" placeholder="Image"
+                                               class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
                                 </div>
                             </div>
                             <div class="mt-4">
                                 <div class="w-full">
-                                    <label for="Email"
-                                           class="block mb-3 text-sm font-semibold text-gray-500">Email</label>
-                                    <input value="isaacdarcilla@gmail.com" name="Last Name" type="text"
-                                           placeholder="Email"
-                                           class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
-                                </div>
-                            </div>
-                            <div class="mt-4">
-                                <div class="w-full">
-                                    <label for="Address"
-                                           class="block mb-3 text-sm font-semibold text-gray-500">Address</label>
-                                    <textarea value="Bicol Region"
+                                    <label for="Description"
+                                           class="block mb-3 text-sm font-semibold text-gray-500">Description</label>
+                                    <textarea v-model="form.item_description"
                                               class="w-full px-4 py-3 text-xs border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
-                                              name="Address" cols="20" rows="4" placeholder="Address"></textarea>
+                                              name="Description" cols="20" rows="4"
+                                              placeholder="Description..."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -68,6 +81,18 @@ export default {
     props: {
         total: Number,
         product: Object,
+        categories: Object,
+    },
+    data() {
+        return {
+            form: {
+                item_name: this.product.name,
+                item_price: this.product.price,
+                item_image: this.product.image,
+                item_category: this.product.category_id ?? null,
+                item_description: this.product.description,
+            },
+        }
     },
 }
 </script>

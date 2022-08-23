@@ -1088,7 +1088,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Cart_Checkout_vue":"087bfcc35f87a6b8","resources_js_Pages_Cart_Index_vue":"59b805b9d6a74c54","resources_js_Pages_Layout_Loading_vue":"b04d82bf99f9f105","resources_js_Pages_Layout_Nav_vue":"5c26f7026696ee0b","resources_js_Pages_Product_Edit_vue":"161b8d7e84957bb6","resources_js_Pages_Product_Index_vue":"9027ff98092b148e","resources_js_Pages_Store_Index_vue":"e69324d1151eddd8"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Cart_Checkout_vue":"087bfcc35f87a6b8","resources_js_Pages_Cart_Index_vue":"59b805b9d6a74c54","resources_js_Pages_Layout_Loading_vue":"b04d82bf99f9f105","resources_js_Pages_Layout_Nav_vue":"5c26f7026696ee0b","resources_js_Pages_Product_Edit_vue":"ddbe5661cb615840","resources_js_Pages_Product_Index_vue":"9027ff98092b148e","resources_js_Pages_Store_Index_vue":"e69324d1151eddd8"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	
