@@ -47,8 +47,7 @@ class ProductController extends Controller
     {
         return inertia('Product/Edit', [
             'total' => Cart::checkoutAt()->count(),
-            'product' => Product::where('slug', $slug)
-                ->first()
+            'product' => $this->product->item($slug),
         ]);
     }
 

@@ -11,4 +11,12 @@ interface ProductInterface
      * @return mixed
      */
     public function all($filter);
+
+    /**
+     * Return product details
+     *
+     * @param $slug
+     * @return mixed
+     */
+    public function item($slug);
 }
