@@ -36,4 +36,16 @@ class ProductRepositories implements ProductInterface
                 })
         ];
     }
+
+    /**
+     * Return product details
+     *
+     * @param $slug
+     * @return mixed
+     */
+    public function item($slug)
+    {
+        return Product::where('slug', $slug)
+            ->first();
+    }
 }
