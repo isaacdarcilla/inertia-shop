@@ -2,6 +2,8 @@
 
 namespace App\Http\Repositories\Product;
 
+use App\Models\Product;
+
 interface ProductInterface
 {
     /**
@@ -19,4 +21,21 @@ interface ProductInterface
      * @return mixed
      */
     public function item($slug);
+
+    /**
+     * Create new product
+     *
+     * @param $request
+     * @return mixed
+     */
+    public function createProduct($request);
+
+    /**
+     * Update product
+     *
+     * @param Product $product
+     * @param $request
+     * @return mixed
+     */
+    public function updateProduct(Product $product, $request);
 }

@@ -24,10 +24,10 @@ class CartRepositories implements CartInterface
                 ->get()
                 ->transform(function ($cart) {
                     return [
-                        'id' => $cart->id,
-                        'product' => $cart->product->name,
-                        'price' => $cart->product->price,
-                        'category' => $cart->product->category->name
+                        'id' => $cart->id ?? null,
+                        'product' => $cart->product->name ?? null,
+                        'price' => $cart->product->price ?? null,
+                        'category' => $cart->product->category->name ?? null
                     ];
                 })
         ];

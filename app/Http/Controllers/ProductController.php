@@ -61,14 +61,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request): RedirectResponse
     {
-        Product::create([
-            'user_id' => 1,
-            'name' => $request->item_name,
-            'price' => $request->item_price,
-            'category_id' => $request->item_category,
-            'description' => $request->item_description,
-            'slug' => sprintf('%s-%s', Str::slug($request->item_name), rand(1000, 9999))
-        ]);
+        $this->product->createProduct($request);
 
         return redirect()->route('product.index');
     }
@@ -97,12 +90,7 @@ class ProductController extends Controller
      */
     public function update(Product $product, ProductRequest $request)
     {
-        $product->update([
-            'name' => $request->item_name,
-            'price' => $request->item_price,
-            'category_id' => $request->item_category,
-            'description' => $request->item_description,
-        ]);
+        $this->product->updateProduct($product, $request);
     }
 
     /**
