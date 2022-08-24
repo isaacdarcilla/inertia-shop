@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static orderByName()
  * @method static count()
  * @method static where(string $string, $slug)
+ * @method static create(array $array)
  */
 class Product extends Model
 {

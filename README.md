@@ -8,7 +8,7 @@ Requirements
 ## TODO
 
 * Unit test
-* Product crud
+* <s>Product crud</s>
 * <s>User relations - user hasMany products & carts</s>
 
 ## Installation

@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Str;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -40,6 +41,39 @@ class ProductController extends Controller
     }
 
     /**
+     * Return the create product page
+     *
+     * @return Response|ResponseFactory
+     */
+    public function create()
+    {
+        return inertia('Product/Create', [
+            'total' => Cart::checkoutAt()->count(),
+            'categories' => Category::all(),
+        ]);
+    }
+
+    /**
+     * Create new product
+     *
+     * @param ProductRequest $request
+     * @return RedirectResponse
+     */
+    public function store(ProductRequest $request): RedirectResponse
+    {
+        Product::create([
+            'user_id' => 1,
+            'name' => $request->item_name,
+            'price' => $request->item_price,
+            'category_id' => $request->item_category,
+            'description' => $request->item_description,
+            'slug' => sprintf('%s-%s', Str::slug($request->item_name), rand(1000, 9999))
+        ]);
+
+        return redirect()->route('product.index');
+    }
+
+    /**
      * Get product and return to edit product page
      *
      * @param $slug
@@ -66,7 +100,6 @@ class ProductController extends Controller
         $product->update([
             'name' => $request->item_name,
             'price' => $request->item_price,
-            'image' => $request->file('item_image') ? $request->file('item_image')->store('photos') : null,
             'category_id' => $request->item_category,
             'description' => $request->item_description,
         ]);

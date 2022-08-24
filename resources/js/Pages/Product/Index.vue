@@ -4,9 +4,11 @@
         <div class="flex">
             <input v-model="this.form.search" type="text" placeholder="Search..."
                    class="p-2 w-9/12 mb-3 flex max-w-full bg-white shadow-lg overflow-hidden">
-            <button class="ml-2 w-3/12 p-2 mb-3 text-white text-center mx-auto hover:bg-indigo-400 bg-indigo-500 shadow-lg overflow-hidden">Add
-                Product
-            </button>
+            <Link href="/product/create"
+                    class="ml-2 w-3/12 p-2 mb-3 text-white text-center mx-auto hover:bg-indigo-400 bg-indigo-500 shadow-lg overflow-hidden">
+                    Add
+                    Product
+            </Link>
         </div>
         <div
             class="flex max-w-full bg-white shadow-lg overflow-hidden">

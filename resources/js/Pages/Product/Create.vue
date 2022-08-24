@@ -7,7 +7,7 @@
             <div class="mx-4">
 
                 <div class="flex flex-col md:w-full mx-auto h-auto">
-                    <h2 class="mb-4 font-bold md:text-xl text-heading mt-3">Edit {{ product.name }}
+                    <h2 class="mb-4 font-bold md:text-xl text-heading mt-3">Create New Product
                     </h2>
                     <form @submit.prevent="submit" class="justify-center w-full mx-auto" method="post" action="">
                         <div class="">
@@ -78,25 +78,24 @@ export default {
     },
     props: {
         total: Number,
-        product: Object,
         categories: Object,
         errors: Object,
     },
     data() {
         return {
             form: {
-                item_name: this.product.name,
-                item_price: this.product.price,
-                item_category: this.product.category_id ?? null,
-                item_description: this.product.description,
+                item_name: null,
+                item_price: null,
+                item_category: null,
+                item_description: null,
             },
         }
     },
     methods: {
         submit() {
-            this.$inertia.put(`/product/update/${this.product.id}`, this.form, {
+            this.$inertia.post(`/product/store`, this.form, {
                 onSuccess: () => {
-                    this.$toast.success(`Product saved.`, {
+                    this.$toast.success(`Product added.`, {
                         position: "bottom",
                     });
                 }
