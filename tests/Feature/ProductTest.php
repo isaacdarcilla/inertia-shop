@@ -7,7 +7,7 @@ test('can render store page', function () {
     $response = $this->get('/');
     $products = Product::all();
 
-    expect($products)->toHaveCount(0)->toBeObject();
+    expect($products)->toBeObject();
     $response->assertStatus(200);
 });
 
@@ -15,7 +15,7 @@ test('can render cart page', function () {
     $response = $this->get('/');
     $carts = Cart::all();
 
-    expect($carts)->toHaveCount(0)->toBeObject();
+    expect($carts)->toBeObject();
     $response->assertStatus(200);
 });
 
@@ -39,4 +39,6 @@ test('can store new product', function () {
         ->and($product->price)->toBe('51');
 
     $response->assertRedirect(route('product.index'));
+})->tap(function () {
+    $this->artisan('migrate:refresh');
 });
