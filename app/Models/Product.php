@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static count()
  * @method static where(string $string, $slug)
  * @method static create(array $array)
+ * @method static first()
  */
 class Product extends Model
 {

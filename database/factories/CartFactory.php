@@ -11,10 +11,13 @@ class CartFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            //
+            'user_id' => 1,
+            'product_id' => 1,
+            'price' => $this->faker->randomDigit(),
+            'checkout_at' => now(),
         ];
     }
 }
