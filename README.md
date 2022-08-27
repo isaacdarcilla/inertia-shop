@@ -7,7 +7,7 @@ Requirements
 
 ## TODO
 
-* Unit test
+* <s>TDD</s>
 * <s>Product crud</s>
 * <s>User relations - user hasMany products & carts</s>
 
