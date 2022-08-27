@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static count()
  * @method static sum(string $string)
  * @method static checkoutAt()
+ * @method static first()
  */
 class Cart extends Model
 {
