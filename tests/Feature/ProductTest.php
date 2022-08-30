@@ -39,11 +39,13 @@ test('can store new product', function () {
         'item_price' => 51,
     ])->assertStatus(302)->assertRedirect(route('product.index'));
 
+    $product = Product::first();
+
     expect(Product::count())->toEqual(1)
-        ->and(Product::first()->user_id)->toBe($user->id)
-        ->and(Product::first()->name)->toBe('Test Product')
-        ->and(Product::first()->description)->toBe('Test Description')
-        ->and(Product::first()->price)->toBe('51');
+        ->and($product->user_id)->toBe($user->id)
+        ->and($product->name)->toBe('Test Product')
+        ->and($product->description)->toBe('Test Description')
+        ->and($product->price)->toBe('51');
 });
 
 test('can render edit product page', function () {
